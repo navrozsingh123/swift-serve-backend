@@ -4,17 +4,20 @@ const mongoURI = process.env.MONGO_URI;
 
 const mongoDB = async () => {
     try {
-        await mongoose.connect(mongoURI);
+        const conn = await mongoose.connect(mongoURI);
         console.log("Connected to MongoDB");
 
-        const menuCollection = mongoose.connection.db.collection("menu");
-        const foodCategoryCollection = mongoose.connection.db.collection("foodCategory");
+        // Use conn.connection.db (from the resolved connection object)
+        const db = conn.connection.db;
+
+        const menuCollection = db.collection("menu");
+        const foodCategoryCollection = db.collection("foodCategory");
+
 
         const foodItems = await menuCollection.find({}).toArray();
         const foodCategory = await foodCategoryCollection.find({}).toArray();
 
         global.menu = { foodCategory, foodItems };
-        // console.log("Menu loaded:", global.menu);
 
     } catch (err) {
         console.error("MongoDB connection error:", err.message);
