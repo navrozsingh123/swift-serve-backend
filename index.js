@@ -16,7 +16,9 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 app.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.json({
+    message: "SwiftServe backend is working!"
+  });
 });
 app.use("/api", require("./Routes/createuser"));
 app.use("/api", require("./Routes/displayData"));
