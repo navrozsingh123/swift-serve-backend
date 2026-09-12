@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Order = require("../models/orders");
+const Order = require("../models/Orders");
 
 router.post("/orderData", async (req, res) => {
     // console.log("BODY RECEIVED:", req.body);
