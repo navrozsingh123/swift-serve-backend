@@ -5,7 +5,7 @@ const Order = require("../models/orders");
 router.post("/orderData", async (req, res) => {
     // console.log("BODY RECEIVED:", req.body);
     let data = req.body.order_data;
-    await data.splice(0, 0, { Order_date: req.body.order_date });
+    data.splice(0, 0, { Order_date: req.body.order_date });
 
     let eId = await Order.findOne({ email: req.body.email });
     // console.log("eId", eId);

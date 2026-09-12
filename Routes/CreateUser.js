@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 router.post(
-  "/creatuser",
+  "/createuser",
   body("name", "Enter a valid name").isLength({ min: 3 }),
   body("location", "Enter a valid location").isLength({ min: 3 }),
   body("email", "Enter a valid email").isEmail(),
