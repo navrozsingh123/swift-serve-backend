@@ -5,14 +5,16 @@ const port = 5001;
 const mongoDB = require('./db');
 const cors = require('cors');
 
-app.use(cors());
+app.use(cors({ 
+  origin: ["https://swift-serve-frontend.vercel.app", "http://localhost:5173"] 
+}));
 mongoDB();
 
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    next();
-});
+// app.use((req, res, next) => {
+//     res.header('Access-Control-Allow-Origin', '*');
+//     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//     next();
+// });
 
 app.use(express.json());
 app.get('/', (req, res) => {
