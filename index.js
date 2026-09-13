@@ -5,8 +5,18 @@ const port = 5001;
 const mongoDB = require('./db');
 const cors = require('cors');
 
-app.use(cors({ 
-  origin: ["https://swift-serve-frontend.vercel.app", "http://localhost:5173"] 
+app.use(cors({
+  origin: (origin, callback) => {
+    if (
+      !origin ||
+      origin === "http://localhost:5173" ||
+      /^https:\/\/swift-serve-frontend.*\.vercel\.app$/.test(origin)
+    ) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  }
 }));
 mongoDB();
 
